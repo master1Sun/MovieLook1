@@ -1,0 +1,42 @@
+<view class="main">
+  <view class="search-box">
+    <input class="search-input" placeholder="搜索" value="{{value}}" bindblur="searchInput" confirm-type="searchInput" />
+    <icon class="weui-icon-search_in-box search-icon" type="search" size="14"></icon>
+    <text class="search-btn" wx:if="{{showResult}}" bindtap="cancelSearch">取消</text>
+  </view>
+  <view class="result" wx:if="{{showResult}}">
+    <view class="result-box" wx:if="{{result.length > 0}}">
+      <view class="result-list" wx:for="{{result}}" wx:key="index">
+        <view class="newDesc">
+          <text>{{item.newDesc}}</text>
+        </view>
+        <navigator url="../details/details?link={{item.link}}&title={{item.title}}">
+          <image src="{{item.image}}"></image>
+          <view class="result-text">
+            <text>{{item.title}}</text>
+          </view>
+        </navigator>
+      </view>
+    </view>
+    <view class="result-null" wx:else>
+      <view class="null-tips">{{searchText}}</view>
+    </view>
+  </view>
+  <view class="init-page" wx:else>
+    <view wx:if="{{history.length > 0}}">
+      <view class="title">
+        <text>搜索记录</text>
+      </view>
+      <view class="tags">
+        <text wx:for="{{history}}" wx:key="index" data-text="{{item}}" bindtap="keywordHandle">{{item}}</text>
+      </view>
+    </view>
+    <view class="title">
+      <text>热门推荐</text>
+    </view>
+    <view class="tags">
+      <text wx:for="{{hot}}" wx:key="index" data-text="{{item}}" bindtap="keywordHandle">{{item}}</text>
+    </view>
+  </view>
+
+</view>

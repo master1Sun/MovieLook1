@@ -1,0 +1,13 @@
+<view class="main">
+  <view class="list-box">
+    <view class="newest-list" wx:for="{{dataList}}" wx:if="{{item[0].image}}">
+      <navigator url="../details/details?title={{item[0].title}}">
+        <image src="{{item[0].image}}"></image>
+        <view class="newest-text">
+          <text>{{item[0].title}}</text>
+        </view>
+      </navigator>
+    </view>
+  </view>
+</view>
+<tui-divider gradual="{{true}}">{{footertitle}}</tui-divider>

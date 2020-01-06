@@ -1,0 +1,6 @@
+function dataaToString(data) {
+  return JSON.stringify(data)
+}
+module.exports = {
+  dataaToString: dataaToString
+}

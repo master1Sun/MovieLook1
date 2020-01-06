@@ -1,0 +1,63 @@
+<wxs src="string.wxs" module="tools" />
+<view class="main">
+  <view class="goods-box">
+    <view class="list">
+      <view class="left" style="width:40%;height:420rpx">
+        <image src="{{productList[0].image}}" style="height:420rpx" />
+      </view>
+      <view class="right" style="width:60%;height:420rpx">
+        <view class="row">
+          <text style="font-size:20px;">{{productList[0].title}} </text>
+        </view>
+        <view class="row">
+          <view class="goods-stock" style="color: black;">
+            {{productList[0].infoList[1]}}
+          </view>
+          <view class="goods-stock" style="color: black;">
+            {{productList[0].infoList[3]}}
+          </view>
+          <view class="goods-stock" style="color: black;">
+            {{productList[0].infoList[5]}}
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+
+
+  <view class="goods-tab-box">
+    <view class="goods-tab-nav {{curIndex === 0 ?'on':''}}" bindtap="bindTap" data-index="0">演员详情</view>
+    <view class="goods-tab-nav {{curIndex === 1 ?'on':''}}" bindtap="bindTap" data-index="1">内容详情</view>
+    <view class="goods-tab-nav {{curIndex === 2 ?'on':''}}" bindtap="bindTap" data-index="2">资源详情</view>
+    <view class="goods-content">
+      <view wx:if="{{curIndex === 0}}">
+        <view class="goods-stock" wx:for="{{productList[0].infoList}}" wx:for-item="p">
+          {{p}}
+        </view>
+      </view>
+      <view wx:if="{{curIndex === 1}}">
+        <view class="tui-sub-title tui-size tui-gray">{{productList[0].desc}}</view>
+      </view>
+      <view wx:if="{{curIndex === 2}}">
+        <view wx:if="{{islogin && playSource  && !public && productList.length>0}}" class="toView">
+          <text class="totext">播放资源请去正规视频网站查看，本程序只提供资源查询~</text>
+        </view>
+        <view wx:if="{{islogin && playSource  && public && productList.length>0}}" class="toView">
+          <text class="totext">分享本剧，邀请好友一起观看~</text>
+          <button class="tobutton" open-type="share">分享</button>
+        </view>
+        <view class="tui-list-cell tui-last" wx:if="{{islogin && playSource  && productList.length>0}}">
+          <view class="tui-bold tui-cell-title">资源详情</view>
+          <view class="tui-promotion-box">
+            <view class="tui-tag-small tui-tag-outline tui-green-outline" wx:for="{{productList[0].alis[0].list}}" wx:for-item="b">{{b.title}}</view>
+          </view>
+        </view>
+        <block wx:if="{{islogin && playSource && public && productList.length>0}}">
+          <button class="playbutton" bindtap="playVideo">播放</button>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

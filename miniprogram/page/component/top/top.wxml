@@ -1,0 +1,24 @@
+<view class="wux-virtual-list">
+  <view style="padding-top: 0px; box-sizing: border-box;" class="wux-virtual-list__scroll-area">
+    <view style="height: 40px;color: green;font-size: 13px;">
+      <view class="item">
+        <view class="index">编号</view>
+        <view class="title">名称</view>
+        <view class="date">更新日期</view>
+        <view class="desc">点击数</view>
+      </view>
+    </view>
+    <view class="wux-virtual-item" style="height: 50px;" wx:for="{{list}}">
+      <navigator url="../details/details?link={{item.link}}&title={{item.name}}" style="height: 50px;">
+        <view class="item">
+          <view class="index" style="color:{{index<3?'red':''}}">#{{index+1}}</view>
+          <view class="title">{{item.name}}</view>
+          <view class="date">{{item.updatetime}}</view>
+          <view class="desc">{{item.count}}</view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+</view>
+
+<tui-divider gradual="{{true}}">{{footertitle}}</tui-divider>

@@ -1,0 +1,65 @@
+<view class="container">
+  <video id="tui-video" src="{{productList.href}}" autoplay controls="{{true}}" object-fit="contain" custom-cache="{{false}}" wx:if="{{productList.href}}" show-fullscreen-btn="true" show-play-btn="true" show-center-play-btn="true" enable-progress-gesture="true"
+    poster="{{productList.href}}" show-mute-btn="true" title="{{name}}{{productList.name}}" enable-play-gesture="true"></video>
+
+
+  <view class="tui-container" wx:if="{{productList.href}}">
+    <text>播放倍速调节：</text>
+    <view class="buttonView" wx:if="{{isLogin}}">
+      <button class="button {{_num=='0.5'?'cur':''}}" bindtap="rate" data-rate="0.5">0.5</button>
+      <button class="button {{_num=='0.8'?'cur':''}}" bindtap="rate" data-rate="0.8">0.8</button>
+      <button class="button {{_num=='1.0'?'cur':''}}" bindtap="rate" data-rate="1.0">1.0</button>
+      <button class="button {{_num=='1.25'?'cur':''}}" bindtap="rate" data-rate="1.25">1.25</button>
+      <button class="button {{_num=='1.5'?'cur':''}}" bindtap="rate" data-rate="1.5">1.5</button>
+      <button class="button {{_num=='2.0'?'cur':''}}" bindtap="rate" data-rate="2.0">2.0</button>
+    </view>
+    <view class="tui-cmt-title">{{name}}
+      <text style="color:blue;">{{productList.name}}</text>
+    </view>
+    <view class="goods-tab-box">
+      <view class="goods-tab-nav {{curIndex == index ?'on':''}}" bindtap="bindTap" data-en="{{p.en_title}}" data-index="{{index}}" wx:for="{{alis}}" wx:for-item="p" wx:key="{{index}}">{{p.title}}</view>
+      <view class="goods-content">
+        <view wx:if="{{curIndex == 0}}">
+          <view class="tui-promotion-box">
+            <view class="tui-tag-small tui-tag-outline tui-green-outline" wx:for="{{alis[curIndex].list}}" wx:for-item="b" bindtap="detail" data-jishu="{{b.title}}">{{b.title}}</view>
+          </view>
+        </view>
+
+        <view wx:if="{{curIndex == 1}}">
+          <view class="tui-promotion-box">
+            <view class="tui-tag-small tui-tag-outline tui-green-outline" wx:for="{{alis[curIndex].list}}" wx:for-item="b" bindtap="detail" data-jishu="{{b.title}}">{{b.title}}</view>
+          </view>
+        </view>
+
+        <view wx:if="{{curIndex == 2}}">
+          <view class="tui-promotion-box">
+            <view class="tui-tag-small tui-tag-outline tui-green-outline" wx:for="{{alis[curIndex].list}}" wx:for-item="b" bindtap="detail" data-jishu="{{b.title}}">{{b.title}}</view>
+          </view>
+        </view>
+
+        <view wx:if="{{curIndex == 3}}">
+          <view class="tui-promotion-box">
+            <view class="tui-tag-small tui-tag-outline tui-green-outline" wx:for="{{alis[curIndex].list}}" wx:for-item="b" bindtap="detail" data-jishu="{{b.title}}">{{b.title}}</view>
+          </view>
+        </view>
+
+        <view wx:if="{{curIndex == 4}}">
+          <view class="tui-promotion-box">
+            <view class="tui-tag-small tui-tag-outline tui-green-outline" wx:for="{{alis[curIndex].list}}" wx:for-item="b" bindtap="detail" data-jishu="{{b.title}}">{{b.title}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view style="margin-top: 5px;">
+      <view class="goods-stock" wx:for="{{infoList}}" wx:for-item="p">
+        {{p}}
+      </view>
+      <view class="tui-news-source">{{desc}}</view>
+    </view>
+  </view>
+
+</view>
+
+
+<tui-modal show="{{modal9}}" bind:click="login" bind:cancel="hide9" content="您还未登录，请先登录" button="{{button3}}" maskClosable="{{false}}"></tui-modal>

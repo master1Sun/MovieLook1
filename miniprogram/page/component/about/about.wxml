@@ -1,0 +1,20 @@
+<view class="container">
+  <view class="tui-content-box" wx:if="{{content.p_title}}">
+    <view class="tui-content" wx:if="{{content.p_title}}">{{content.p_title}}</view>
+    <view class="tui-content" wx:if="{{content.p_name1}}">{{content.p_name1}}</view>
+    <view class="tui-content" wx:if="{{content.p_name2}}">{{content.p_name2}}</view>
+    <view class="tui-content" wx:if="{{content.p_name3}}">{{content.p_name3}}</view>
+    <view class="tui-content" wx:if="{{content.p_name4}}">{{content.p_name4}}</view>
+    <view class="tui-content" wx:if="{{content.p_name5}}">{{content.p_name5}}</view>
+    <view class="tui-content" wx:if="{{content.p_name6}}">{{content.p_name6}}</view>
+    <view class="tui-content" wx:if="{{content.p_name7}}">{{content.p_name7}}</view>
+    <view class="tui-content" wx:if="{{content.p_name8}}">{{content.p_name8}}</view>
+    <view class="tui-content" wx:if="{{content.p_name9}}">{{content.p_name9}}</view>
+    <view class="tui-content tui-content-email" bindtap="email" data-email="{{content.p_email}}" wx:if="{{content.p_email}}">{{content.p_email}} </view>
+    <view class="tui-footer">
+      <image src='{{content.p_src}}' data-src="{{content.p_src}}" bindtap="previewReward" class="tui-applets" mode="widthFix" wx:if="{{content.p_src}}"></image>
+      <view class="tui-footer-text" wx:if="{{content.p_footer}}">{{content.p_footer}}</view>
+    </view>
+  </view>
+  <button size='mini' open-type="contact" class="contact">在线客服</button>
+</view>

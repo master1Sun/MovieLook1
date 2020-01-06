@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "",
+  "disableScroll": false,
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "tui-modal": "../../../components/modal/modal",
+    "tui-button": "../../../components/button/button"
+  }
+}

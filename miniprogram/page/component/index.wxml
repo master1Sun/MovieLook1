@@ -1,0 +1,46 @@
+<view class="main">
+  <view class='top-container'>
+    <image class='bg-img' src='{{imgList.src}}'></image>
+    <text class="bg-day">{{imgList.day}}</text>
+    <text class="bg-year">{{imgList.year}}</text>
+    <text class="bg-txt">{{imgList.title}}</text>
+
+    <view class='logout' hover-class="opcity" hover-stay-time="150">
+      <view bindtap='logout' hidden='{{!isLogin}}'>
+        <image class='logout-img' src='../../image/icon_out_3x.png' hidden='{{!isLogin}}'></image>
+        <!-- <text class='logout-txt' hidden='{{!isLogin}}'>退出</text> -->
+      </view>
+    </view>
+    <view hidden='{{isLogin}}' class='user-wrapper'>
+      <view hover-class="opcity" hover-stay-time="150" class='user' bindtap="switchKeyboard">
+        <image class='avatar-img' src='../../image/mine_def_touxiang_3x.png'></image>
+        <text class='user-info-mobile'>请登录</text>
+      </view>
+    </view>
+    <view hidden='{{!isLogin}}' class='user'>
+      <open-data type='userAvatarUrl' class="userinfo" mode="cover"></open-data>
+      <view class='user-info-mobile'>
+        <open-data type="userNickName"></open-data>
+        <!-- <view class='edit-img' hover-class="opcity" hover-stay-time="150" bindtap="edit">
+          <image src='../../image/mine_icon_bianji_3x.png'></image>
+        </view> -->
+      </view>
+    </view>
+  </view>
+  <view class="search">
+    <navigator url="search/search?hot={{hot}}">
+      <view class="search-text">
+        <icon class="weui-icon-search_in-box search-icon" type="search" size="14"></icon>
+        搜 索
+      </view>
+    </navigator>
+  </view>
+  <tui-footer copyright="Copyright © {{date}}.{{IPaddress}}" navigate="{{navigate}}" bgcolor="#ffffff"></tui-footer>
+
+</view>
+<tui-keyboard show="{{show}}" bind:close="closeKeyboard" bind:click="keyboardClick">
+  <view class="tui-digital-box">
+    <view class="tui-keyboard-tips">请输入密码</view>
+    <tui-keyboard-input inputvalue="{{pwdArr}}"></tui-keyboard-input>
+  </view>
+</tui-keyboard>

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "TOP100",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "tui-divider": "../../../components/divider/divider"
+  }
+}

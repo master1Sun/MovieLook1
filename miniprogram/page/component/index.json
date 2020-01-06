@@ -1,0 +1,10 @@
+{
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "首页",
+  "disableScroll": true,
+  "usingComponents": {
+    "tui-keyboard": "../../components/keyboard/keyboard",
+    "tui-keyboard-input": "../../components/keyboard-input/keyboard-input",
+    "tui-footer": "../../../components/footer/footer"
+  }
+}

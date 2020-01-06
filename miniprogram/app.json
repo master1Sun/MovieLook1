@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "page/component/index",
+    "page/component/category/category",
+    "page/component/details/details",
+    "page/component/search/search",
+    "page/component/playVideo/playVideo",
+    "page/component/about/about",
+    "page/component/playhistory/playhistory",
+    "page/component/top/top"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": " ",
+    "navigationBarBackgroundColor": "#AB956D",
+    "backgroundColor": "#eeeeee",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#b7b7b7",
+    "selectedColor": "#AB956D",
+    "borderStyle": "white",
+    "backgroundColor": "#f5f5f5",
+    "list": [
+      {
+        "pagePath": "page/component/category/category",
+        "iconPath": "image/12.png",
+        "selectedIconPath": "image/11.png",
+        "text": "主页"
+      },
+      {
+        "pagePath": "page/component/index",
+        "iconPath": "image/42.png",
+        "selectedIconPath": "image/41.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "debug": false,
+  "sitemapLocation": "sitemap.json",
+  "requiredBackgroundModes": [
+    "audio",
+    "location"
+  ]
+}
