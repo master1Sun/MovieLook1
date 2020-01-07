@@ -43,3 +43,14 @@
   text-align: tenter;
   position: absolute;
 }
+
+
+.toView {
+  text-align: center;
+}
+
+.totext {
+  font-size: 11px;
+  text-align: center;
+  color: red;
+}

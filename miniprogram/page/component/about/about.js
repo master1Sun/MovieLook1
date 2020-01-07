@@ -3,7 +3,7 @@ Page({
   data: {
     content: {}
   },
-  onLoad: function (options) {
+  onLoad: function(options) {
     wx.showNavigationBarLoading()
     let that = this;
     api.getDescribe({
@@ -33,7 +33,7 @@ Page({
       }
     })
   },
-  email: function (e) {
+  email: function(e) {
     let email = e.currentTarget.dataset.email;
     let number = email.replace(/[^0-9]/ig, "")
     wx.setClipboardData({
@@ -47,7 +47,7 @@ Page({
       }
     })
   },
-  previewReward: function (e) {
+  previewReward: function(e) {
     let src = e.currentTarget.dataset.src;
     wx.previewImage({
       urls: [src]

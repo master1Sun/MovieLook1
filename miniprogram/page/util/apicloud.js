@@ -49,6 +49,10 @@ const getplayHistory = (params) => {
   params.data ? params.data.NODEJS = 6 : params.data = { NODEJS: 6 }
   wxRequest(params, 'getConfig')
 }
+const getUserInfo = (params) => {
+  params.data ? params.data.NODEJS = 7 : params.data = { NODEJS: 7 }
+  wxRequest(params, 'getConfig')
+}
 //getNetData
 
 //主页面信息
@@ -88,6 +92,7 @@ module.exports = {
   getsystemInit,
   getLoginPwd,
   getplayHistory,
+  getUserInfo,
   getIndexDataHotData,
   getTypeData,
   getDataInfo,

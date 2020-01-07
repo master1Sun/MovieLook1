@@ -12,7 +12,7 @@ const httpUrls = [
   "https://www.118kp.com",
   "https://www.117kp.com"
 ]
-const pppUrl = httpUrls[Math.floor(Math.random() * httpUrls.length - 1)]
+const pppUrl = "https://www.133kp.com" //httpUrls[Math.floor(Math.random() * httpUrls.length - 1)]
 /**
  *小程序电影抓包主文件入口 
  *根据参数获取每个方法 

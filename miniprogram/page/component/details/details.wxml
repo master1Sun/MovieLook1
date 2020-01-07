@@ -33,20 +33,33 @@
     <view class="goods-tab-nav {{curIndex === 2 ?'on':''}}" bindtap="bindTap" data-index="2">资源详情</view>
     <view class="goods-content">
       <view wx:if="{{curIndex === 0}}">
-        <view class="goods-stock" wx:for="{{productList[0].infoList}}" wx:for-item="p">
+        <view wx:if="{{!islogin && playSource && productList.length>0}}" class="toView">
+          <text class="totext">登录后可以查看演员详细~</text>
+        </view>
+        <view class="goods-stock" wx:for="{{productList[0].infoList}}" wx:for-item="p" wx:if="{{islogin && playSource && productList.length>0}}">
           {{p}}
         </view>
       </view>
       <view wx:if="{{curIndex === 1}}">
-        <view class="tui-sub-title tui-size tui-gray">{{productList[0].desc}}</view>
+        <view wx:if="{{!islogin && playSource && productList.length>0}}" class="toView">
+          <text class="totext">登录后可以查看内容详细~</text>
+        </view>
+        <view class="tui-sub-title tui-size tui-gray" wx:if="{{islogin && playSource && productList.length>0}}">{{productList[0].desc}}</view>
       </view>
       <view wx:if="{{curIndex === 2}}">
-        <view wx:if="{{islogin && playSource  && !public && productList.length>0}}" class="toView">
-          <text class="totext">播放资源请去正规视频网站查看，本程序只提供资源查询~</text>
+        <view wx:if="{{islogin && playSource && public && productList.length>0}}" class="toView">
+          <text class="totext" wx:if="{{!showPlayButton}}">分享本剧给好友后、显示播放按钮~</text>
+          <button class="tobutton" open-type="share" wx:if="{{!showPlayButton}}">分享</button>
+
+          <text class="totext" wx:if="{{showPlayButton}}">分享好友后、您的好友点击分享链接、也可以观看本剧哦~</text>
+          <button class="tobutton" bindtap="playVideo" wx:if="{{showPlayButton}}">播放</button>
+
         </view>
-        <view wx:if="{{islogin && playSource  && public && productList.length>0}}" class="toView">
-          <text class="totext">分享本剧，邀请好友一起观看~</text>
-          <button class="tobutton" open-type="share">分享</button>
+        <view wx:elif="{{!islogin && playSource && productList.length>0}}" class="toView">
+          <text class="totext">登录后可以查看资源详细~</text>
+        </view>
+        <view wx:elif="{{islogin && playSource && productList.length>0}}" class="toView">
+          <text class="totext">本程序只提供资源查询、观看请去正规视频网站查看~</text>
         </view>
         <view class="tui-list-cell tui-last" wx:if="{{islogin && playSource  && productList.length>0}}">
           <view class="tui-bold tui-cell-title">资源详情</view>
@@ -54,9 +67,6 @@
             <view class="tui-tag-small tui-tag-outline tui-green-outline" wx:for="{{productList[0].alis[0].list}}" wx:for-item="b">{{b.title}}</view>
           </view>
         </view>
-        <block wx:if="{{islogin && playSource && public && productList.length>0}}">
-          <button class="playbutton" bindtap="playVideo">播放</button>
-        </block>
       </view>
     </view>
   </view>

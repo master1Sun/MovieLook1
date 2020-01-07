@@ -8,6 +8,7 @@ Page({
     href: '',
     playSource: false,
     public: false,
+    showPlayButton: false,
   },
   back: function () {
     wx.navigateBack()
@@ -56,6 +57,7 @@ Page({
             data = JSON.parse(res.result);
           }
           if (data.length > 0) {
+            data[0].url = that.data.href;
             that.setData({
               productList: data,
             })
@@ -100,8 +102,13 @@ Page({
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
-      // console.log(res.target)
       if (this.data.productList.length > 0) {
+        let that = this;
+        setTimeout(function () {
+          that.setData({
+            showPlayButton: true
+          })
+        }, 500)
         return {
           title: '我想要看《' + this.data.productList[0].title + '》点击进来就可以查看详细内容',
           path: '/page/component/playVideo/playVideo?productList=' + JSON.stringify(this.data.productList) + '&link=' + this.data.href,

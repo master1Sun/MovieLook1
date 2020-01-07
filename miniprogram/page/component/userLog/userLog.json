@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "访问日志",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "tui-divider": "../../../components/divider/divider"
+  }
+}

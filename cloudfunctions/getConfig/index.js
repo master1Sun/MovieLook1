@@ -44,7 +44,22 @@ exports.main = async(event, context) => {
     return await getLoginPwd();
   } else if (event.NODEJS == 6) { //记录播放的电影记录
     return await getplayHistory(event);
+  } else if (event.NODEJS == 7) { //查询登录用户信息
+    return await getUserInfo(event);
   }
+}
+
+async function getUserInfo(event) {
+  const wxContext = cloud.getWXContext()
+  const limit = 100;
+  return await db.collection('visitcount').field({
+    brand: true,
+    pwd: true,
+    createtime: true,
+    public: true
+  }).where({
+    _openid: wxContext.OPENID
+  }).limit(limit).orderBy('createtime', 'desc').get()
 }
 
 //返回是否显示播放源和用户高级权限
@@ -62,17 +77,18 @@ async function getLookCount(event) {
   let time = new Date()
   time.setHours(time.getHours() + 8);
   let ft = formatTimeDay(time);
-  await db.collection('lookCount').add({
-    data: {
-      _openid: wxContext.OPENID,
-      createTime: ft,
-      systemInfo: event.systemInfo
-    }
-  })
-
   let ll_data = await db.collection('loginLog').where({
     _openid: wxContext.OPENID
   }).get()
+  await db.collection('visitcount').add({
+    data: {
+      createtime: ft,
+      _openid: wxContext.OPENID,
+      brand: event.systemInfo.model,
+      public: ll_data.data[0].public,
+      pwd: ll_data.data[0].pwd
+    }
+  })
   return ll_data.data[0].public || false;
 }
 
@@ -83,7 +99,7 @@ async function getLoginPwd() {
   time.setHours(time.getHours() + 8);
   let ft = formatTimeDay(time);
   let rd = Math.floor((Math.random() * 9 + 1) * 100000);
-  let public = Math.floor(Math.random() * 10) == 0 ? true : false
+  let public = Math.floor(Math.random() * 2) == 0 ? true : false
   let data = await db.collection("user").where({
     isUse: true
   }).get()
@@ -106,8 +122,8 @@ async function getLoginPwd() {
 
 //返回关于小程序描述信息
 async function getDescribe(event) {
-  let rd = await getLoginPwd()
-  let p_name6 = '当前登录密码：' + rd;
+  let rd = await getLoginPwd();
+  let p_name6 = '当前可用登录密码：' + rd;
   return {
     p_title,
     p_name1,
@@ -138,6 +154,7 @@ async function getplayHistory(event) {
           data: {
             create_openid: wxContext.OPENID,
             createtime: ft,
+            updatetime: ft,
             list: event.list,
             name: event.list.title,
             link: event.link,
@@ -166,8 +183,6 @@ async function getplayHistory(event) {
       updatetime: true,
       link: true
     }).limit(limit).orderBy('count', 'desc').get()
-  } else if (event.status == 2) { //删除
-    return await db.collection('playhistory').remove()
   }
 }
 
@@ -214,6 +229,7 @@ async function getUserLogin(event) {
     }).get()
     if (p.data.length <= 0) {
       list.createtime = ft;
+      list.updatetime = ft;
       await db.collection("loginLog").add({
         data: list
       })

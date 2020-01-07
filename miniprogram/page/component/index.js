@@ -210,6 +210,13 @@ Page({
       icon: "none"
     })
   },
+  toUserLog() {
+    if (getApp().globalData.isLogin) {
+      wx.navigateTo({
+        url: "/page/component/userLog/userLog"
+      })
+    }
+  },
   getIP() {
     var that = this;
     wx.request({

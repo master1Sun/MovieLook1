@@ -18,7 +18,7 @@ const Value7 = '清除剩余用户';
 const Value8 = '查询剩余用户';
 const Value9 = '帮助';
 // 云函数入口函数
-exports.main = async(event, context) => {
+exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   if (fuzzyQuery(Value1, event.Content) || event.Content == '1') {
     let data = await db.collection("loginLog").aggregate()
@@ -30,7 +30,7 @@ exports.main = async(event, context) => {
     let count_vip = 0
     let count_pt = 0;
     if (data.list.length > 0) {
-      data.list.forEach(function(v) {
+      data.list.forEach(function (v) {
         if (v._id) {
           count_vip = v.num;
         } else {
@@ -45,12 +45,11 @@ exports.main = async(event, context) => {
     }).remove()
     await sendMessage('已经清除您生成的' + data.stats.removed + '条登录密码', event.Content)
   } else if (fuzzyQuery(Value3, event.Content) || event.Content == '3') {
-    let data = await db.collection("lookCount").count()
-    await sendMessage('所有人总共访问次数为：' + data.total + '次', event.Content)
+    await sendMessage('暂时没有记录', event.Content)
   } else if (fuzzyQuery(Value4, event.Content) || event.Content == '4') {
     let data = await db.collection("loginLog").get();
     let count = 0;
-    data.data.forEach(function(v) {
+    data.data.forEach(function (v) {
       count += v.loginCount
     })
     await sendMessage('所有人总共登录次数为：' + count + '次', event.Content)
@@ -63,7 +62,7 @@ exports.main = async(event, context) => {
     let data = await db.collection("user").where({
       isUse: true
     }).get()
-    if (data.data.length <= 0) {
+    if (data.data.length <= 5) {
       await db.collection("user").add({
         data: {
           public: public,

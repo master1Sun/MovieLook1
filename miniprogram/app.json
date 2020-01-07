@@ -7,7 +7,8 @@
     "page/component/playVideo/playVideo",
     "page/component/about/about",
     "page/component/playhistory/playhistory",
-    "page/component/top/top"
+    "page/component/top/top",
+    "page/component/userLog/userLog"
   ],
   "window": {
     "navigationBarTextStyle": "white",

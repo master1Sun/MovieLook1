@@ -19,7 +19,7 @@
     </view>
     <view hidden='{{!isLogin}}' class='user'>
       <open-data type='userAvatarUrl' class="userinfo" mode="cover"></open-data>
-      <view class='user-info-mobile'>
+      <view class='user-info-mobile' bindtap="toUserLog">
         <open-data type="userNickName"></open-data>
         <!-- <view class='edit-img' hover-class="opcity" hover-stay-time="150" bindtap="edit">
           <image src='../../image/mine_icon_bianji_3x.png'></image>
