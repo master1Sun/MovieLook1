@@ -5,14 +5,8 @@ const request = require('superagent');
 const Promise = require('bluebird');
 cloud.init()
 
-const httpUrls = [
-  "https://www.133kp.com",
-  "https://www.993kp.com",
-  "https://www.116kp.com",
-  "https://www.118kp.com",
-  "https://www.117kp.com"
-]
-const pppUrl = "https://www.133kp.com" //httpUrls[Math.floor(Math.random() * httpUrls.length - 1)]
+
+const pppUrl = "" 
 /**
  *小程序电影抓包主文件入口 
  *根据参数获取每个方法 
@@ -22,7 +16,7 @@ const pppUrl = "https://www.133kp.com" //httpUrls[Math.floor(Math.random() * htt
 // 云函数入口函数
 exports.main = async(event, context) => {
   const wxContext = cloud.getWXContext()
-  if (event.NODEJS == 0) { //主页面信息
+  if (event.NODEJS == 0) { //热门电影信息
     return await getIndexDataHotData(event);
   } else if (event.NODEJS == 1) { //电影类型页面信息
     return await getTypeData(event);
@@ -196,7 +190,7 @@ async function getPlayDataInfo(event) {
   return JSON.stringify(mlist);
 }
 
-//获取主页轮播图数据和热门资源数据
+//获取热门资源数据
 async function getIndexDataHotData() {
   let dlist = [];
   let page1 = await getPage(pppUrl + '/label-top.html');
