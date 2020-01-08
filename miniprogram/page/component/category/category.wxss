@@ -4,6 +4,25 @@ page, .main {
   height: 100%;
 }
 
+.search-box {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  text-align: center
+}
+
+.search-input {
+  flex: 1;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 0 20rpx 0 54rpx;
+  background: #fcfcfc;
+  border-radius: 0rpx;
+  font-size: 32rpx;
+  border: 2rpx solid rgb(209, 209, 209);
+}
+
+
 .categroy-left {
   float: left;
   width: 150rpx;

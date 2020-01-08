@@ -25,25 +25,25 @@ let a = 0,
 Page({
   data: {
     category: [{
-      name: '热门',
-      id: 'remen'
-    },
-    {
-      name: '电影',
-      id: 'dianying'
-    },
-    {
-      name: '电视剧',
-      id: 'dianshi'
-    },
-    {
-      name: '综艺',
-      id: 'zongyi'
-    },
-    {
-      name: '动漫',
-      id: 'dongman'
-    }
+        name: '热门',
+        id: 'remen'
+      },
+      {
+        name: '电影',
+        id: 'dianying'
+      },
+      {
+        name: '电视剧',
+        id: 'dianshi'
+      },
+      {
+        name: '综艺',
+        id: 'zongyi'
+      },
+      {
+        name: '动漫',
+        id: 'dongman'
+      }
     ],
     productList: [],
     curIndex: 0,
@@ -54,7 +54,7 @@ Page({
     type: '',
     scrollTop: 0
   },
-  onShow: function () {
+  onShow: function() {
     let storeage = wx.getStorageSync('videoList');
     if (storeage && storeage != '') {
       videoList = storeage
@@ -79,7 +79,7 @@ Page({
       }
     }
   },
-  onHide: function () {
+  onHide: function() {
     wx.setStorageSync('videoList', videoList);
   },
   bindscroll(e) {
@@ -121,14 +121,14 @@ Page({
       self.getShowData('d', '动漫')
     }
   },
-  getShowData: function (type, name) {
+  getShowData: function(type, name) {
     a = 0, b = 0, c = 0, zlist = [];
     this.getData(type, this.getPageNum(type))
     wx.setNavigationBarTitle({
       title: name
     })
   },
-  getPageNum: function (type) {
+  getPageNum: function(type) {
     let pageNumber = 1;
     return pageNumber
   },
@@ -172,7 +172,7 @@ Page({
       this.getloadData(that, type, page)
     }
   },
-  getloadData: function (that, type, page) {
+  getloadData: function(that, type, page) {
     wx.showNavigationBarLoading()
     api.getTypeData({
       data: {
@@ -216,7 +216,7 @@ Page({
       }
     })
   },
-  getwriteData: function (that, type, data) {
+  getwriteData: function(that, type, data) {
     let list = [];
     if (that.data.page == 1) {
       that.setData({
@@ -225,7 +225,7 @@ Page({
       list = data
     } else {
       list = that.data.productList
-      data.forEach(function (k) {
+      data.forEach(function(k) {
         list.push(k)
       })
     }
@@ -251,7 +251,7 @@ Page({
     }
   },
 
-  gethotloadData: function (that) {
+  gethotloadData: function(that) {
     wx.showNavigationBarLoading()
     api.getIndexDataHotData({
       success: res => {
@@ -273,6 +273,11 @@ Page({
       complete: () => {
         wx.hideNavigationBarLoading()
       }
+    })
+  },
+  toSearch() {
+    wx.navigateTo({
+      url: '/page/component/search/search'
     })
   }
 })

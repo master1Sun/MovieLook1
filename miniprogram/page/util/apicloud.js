@@ -24,41 +24,23 @@ const wxRequest = (params, url, tip) => {
 
 //getconfig
 
-//返回关于小程序描述信息
-const getDescribe = (params) => {
-  params.data ? params.data.NODEJS = 2 : params.data = { NODEJS: 2 }
-  wxRequest(params, 'getConfig', '加载中...')
-}
+
 //用户登录验证
-const getUserLogin = (params) => {
-  params.data ? params.data.NODEJS = 3 : params.data = { NODEJS: 3 }
-  wxRequest(params, 'getConfig', '登录中...')
-}
-//返回是否显示播放源和配置信息
 const getsystemInit = (params) => {
-  params.data ? params.data.NODEJS = 4 : params.data = { NODEJS: 4 }
-  wxRequest(params, 'getConfig', '正在初始化页面')
-}
-//获取登录密码
-const getLoginPwd = (params) => {
-  params.data ? params.data.NODEJS = 5 : params.data = { NODEJS: 5 }
-  wxRequest(params, 'getConfig')
+  params.data ? params.data.NODEJS = 0 : params.data = { NODEJS: 0 }
+  wxRequest(params, 'getinit')
 }
 //记录播放的电影记录
 const getplayHistory = (params) => {
-  params.data ? params.data.NODEJS = 6 : params.data = { NODEJS: 6 }
-  wxRequest(params, 'getConfig')
-}
-const getUserInfo = (params) => {
-  params.data ? params.data.NODEJS = 7 : params.data = { NODEJS: 7 }
-  wxRequest(params, 'getConfig')
+  params.data ? params.data.NODEJS = 1 : params.data = { NODEJS: 1 }
+  wxRequest(params, 'getinit')
 }
 //getNetData
 
-//主页面信息
+//热门电影信息
 const getIndexDataHotData = (params) => {
   params.data ? params.data.NODEJS = 0 : params.data = { NODEJS: 0 }
-  wxRequest(params, 'getNetData')
+  wxRequest(params, 'getNetData', '正在获取数据...')
 }
 //电影类型页面信息
 const getTypeData = (params) => {
@@ -87,12 +69,8 @@ const getOneOnly = (params) => {
 }
 
 module.exports = {
-  getDescribe,
-  getUserLogin,
   getsystemInit,
-  getLoginPwd,
   getplayHistory,
-  getUserInfo,
   getIndexDataHotData,
   getTypeData,
   getDataInfo,

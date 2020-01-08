@@ -12,13 +12,13 @@ page {
 
 .tui-container {
   /* padding: 470rpx 30rpx 30rpx 30rpx; */
-  padding: 471rpx 5rpx 30rpx 5rpx;
+  padding: 40rpx 5rpx 30rpx 5rpx;
 }
 
 #tui-video {
   width: 100%;
   height: 440rpx;
-  position: fixed;
+  /* position: fixed; */
   left: 0;
   top: 0;
   object-fit: fill;

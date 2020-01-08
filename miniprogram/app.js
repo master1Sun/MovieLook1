@@ -1,7 +1,11 @@
 const api = require('/page/util/apicloud.js')
 App({
+  //全局数据，中文日期，供转换用
+  chineseDate: {
+    years: ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'],
+    months: ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二']
+  },
   onLaunch: function() {
-
     if (!wx.cloud) {
       wx.showToast({
         title: '您的微信版本太低',
@@ -52,9 +56,7 @@ App({
     } else {
       // 当前微信版本过低，无法使用该功能
     }
-    this.getData();
     this.onloadInit();
-    this.getIP();
     wx.onMemoryWarning(function() {
       wx.showToast({
         title: '小程序内存不足警告~',
@@ -71,7 +73,7 @@ App({
       },
       success: res => {
         _self.globalData.playSource = res.result.playSource;
-        _self.globalData.music = res.result.music;
+        _self.globalData.music = res.result.music || {};
         _self.globalData.public = res.result.public
         if (res.result.music) {
           wx.playBackgroundAudio({
@@ -88,90 +90,13 @@ App({
     if (res.limitSize - res.currentSize < 150) {
       wx.clearStorage()
     }
-    if (res.limitSize - res.currentSize < 4050) {
-      if (res.keys.length > 0) {
-        res.keys.forEach(function(v) {
-          if (v != 'hotstoreage' && v != 'student') {
-            wx.removeStorage({
-              key: v
-            })
-          }
-        })
-      }
-    }
   },
   onHide: function() {
     wx.pauseBackgroundAudio()
   },
   globalData: {
-    isLogin: wx.getStorageSync("student") ? true : false
-  },
-
-  getData(cloudFunction) {
-    wx.showNavigationBarLoading()
-    let that = this;
-    let hotstoreage = wx.getStorageSync("hotstoreage")
-    if (hotstoreage && hotstoreage != '') {
-      if (hotstoreage.length > 0) {
-        let plist = [];
-        let random = Math.floor(Math.random() * (30 - 1 + 1) + 1);
-        for (let i = 0; i < random; i++) {
-          plist.push(hotstoreage[i].title)
-        }
-        that.globalData.hot = plist
-        that.globalData.hotData = hotstoreage;
-        wx.hideNavigationBarLoading()
-      } else {
-        that.getCloudloadData(that, cloudFunction)
-      }
-    } else {
-      that.getCloudloadData(that, cloudFunction)
-    }
-  },
-  getCloudloadData(that, cloudFunction) {
-    api.getIndexDataHotData({
-      success: res => {
-        if (res.errMsg == "cloud.callFunction:ok") {
-          var data = [];
-          if (typeof res.result == "object") {
-            data = res.result
-          } else {
-            data = JSON.parse(res.result)
-          }
-          if (data.length > 0) {
-            wx.setStorageSync('hotstoreage', data);
-            that.globalData.hotData = data;
-            let plist = [];
-            let random = Math.floor(Math.random() * (30 - 1 + 1) + 1);
-            for (let i = 0; i < random; i++) {
-              plist.push(data[i].title)
-            }
-            that.globalData.hot = plist
-          }
-        }
-      },
-      complete: () => {
-        wx.hideNavigationBarLoading()
-      }
-    })
-  },
-  getIP() {
-    var that = this;
-    wx.request({
-      url: 'https://pv.sohu.com/cityjson?ie=utf-8',
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: function(e) {
-        var aaa = e.data.split(' ');
-        var bbb = aaa[4].replace('"', '').replace('"', '').replace(',', '')
-        var ccc = aaa[8].replace('"', '').replace('"', '').replace(',', '').replace('};', '')
-        var ddd = aaa[6].replace('"', '').replace('"', '').replace(',', '').replace('};', '')
-        that.globalData.IP = bbb;
-        that.globalData.IPaddress = ccc;
-        that.globalData.IPCode = ddd;
-      }
-    })
-  },
+    playSource: false,
+    music: {},
+    public: false
+  }
 })

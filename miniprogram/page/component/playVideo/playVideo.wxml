@@ -4,8 +4,8 @@
 
 
   <view class="tui-container" wx:if="{{productList.href}}">
-    <text>播放倍速调节：</text>
-    <view class="buttonView" wx:if="{{isLogin}}">
+    <view class="tui-cmt-title">播放倍速调节</view>
+    <view class="buttonView">
       <button class="button {{_num=='0.5'?'cur':''}}" bindtap="rate" data-rate="0.5">0.5</button>
       <button class="button {{_num=='0.8'?'cur':''}}" bindtap="rate" data-rate="0.8">0.8</button>
       <button class="button {{_num=='1.0'?'cur':''}}" bindtap="rate" data-rate="1.0">1.0</button>
@@ -51,6 +51,7 @@
       </view>
     </view>
 
+    <view class="tui-cmt-title">内容介绍</view>
     <view style="margin-top: 5px;">
       <view class="goods-stock" wx:for="{{infoList}}" wx:for-item="p">
         {{p}}
@@ -59,7 +60,8 @@
     </view>
   </view>
 
+  <view class="tui-cmt-title">声明</view>
+  <view class="tui-news-source">本程序所有资源来源于互联网，只提供网络测试和学习交流所用、所有视频版权归原权利人， 如果有关视频侵犯了你的权益，请联系邮箱457358344@qq.com第一时间删除！！
+  </view>
+
 </view>
-
-
-<tui-modal show="{{modal9}}" bind:click="login" bind:cancel="hide9" content="您还未登录，请先登录" button="{{button3}}" maskClosable="{{false}}"></tui-modal>

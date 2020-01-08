@@ -4,9 +4,7 @@ Page({
     height: 64, //header高度
     top: 35, //标题图标距离顶部距离
     curIndex: 0,
-    islogin: getApp().globalData.isLogin,
     href: '',
-    playSource: false,
     public: false,
     showPlayButton: false,
   },
@@ -15,18 +13,14 @@ Page({
   },
   onShow() {
     this.setData({
-      playSource: getApp().globalData.playSource,
       public: getApp().globalData.public,
-      islogin: getApp().globalData.isLogin,
     })
   },
   onLoad(options) {
     wx.showNavigationBarLoading()
     let that = this;
     that.setData({
-      islogin: getApp().globalData.isLogin,
       href: options.link,
-      playSource: getApp().globalData.playSource,
       public: getApp().globalData.public
     })
     let storeage = wx.getStorageSync(options.title)

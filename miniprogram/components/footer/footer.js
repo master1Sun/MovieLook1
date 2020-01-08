@@ -38,54 +38,40 @@ Component({
   },
   methods: {
     clearStoreage() {
-      wx.vibrateShort() //短暂震动
-      const storage = wx.getStorageInfoSync()
-      let size = (storage.currentSize / 1024).toFixed(2)
-      wx.showModal({
-        title: '提示',
-        content: '当前缓存已使用' + size + '兆是否清理？',
-        confirmColor: '#5677FC',
-        success: (res) => {
-          if (res.confirm) {
-            wx.vibrateShort() //短暂震动
-            if (storage.keys.length > 0) {
-              storage.keys.forEach(function(v) {
-                if (v != 'student') {
-                  wx.removeStorage({
-                    key: v
-                  })
-                }
-              })
+      if (getApp().globalData.playSource) {
+        wx.vibrateShort() //短暂震动
+        const storage = wx.getStorageInfoSync()
+        let size = (storage.currentSize / 1024).toFixed(2)
+        wx.showModal({
+          title: '提示',
+          content: '当前缓存已使用' + size + '兆是否清理？',
+          confirmColor: '#5677FC',
+          success: (res) => {
+            if (res.confirm) {
+              wx.vibrateShort() //短暂震动
+              wx.clearStorageSync()
               wx.showToast({
                 title: '清理成功~',
                 icon: "none"
               })
             }
           }
-        }
-      });
+        });
+      }
     },
     playhistory() {
-      if (getApp().globalData.isLogin) {
+      if (getApp().globalData.playSource) {
+        wx.vibrateShort() //短暂震动
         wx.navigateTo({
           url: "/page/component/playhistory/playhistory"
-        })
-      } else {
-        wx.showToast({
-          title: '请先登录再试~',
-          icon: "none"
         })
       }
     },
     top100() {
-      if (getApp().globalData.isLogin) {
+      if (getApp().globalData.playSource) {
+        wx.vibrateShort() //短暂震动
         wx.navigateTo({
           url: "/page/component/top/top"
-        })
-      } else {
-        wx.showToast({
-          title: '请先登录再试~',
-          icon: "none"
         })
       }
     }

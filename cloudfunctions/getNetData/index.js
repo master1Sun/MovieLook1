@@ -44,6 +44,7 @@ async function getOneOnly() {
   let $ = cheerio.load(page.text);
   let plist = [];
   let dateTime = new Date();
+  let pdb = await getDoubanHot()
   $('.carousel-inner').children().each(function(index, element) {
     const el = $(element);
     let src = el.find('a').find('img').attr('src'),
@@ -51,14 +52,41 @@ async function getOneOnly() {
       year = el.find('div[class="fp-one-cita-wrapper"]').find('div[class="fp-one-titulo-pubdate"]').find('p[class="may"]').text(),
       day = el.find('div[class="fp-one-cita-wrapper"]').find('div[class="fp-one-titulo-pubdate"]').find('p[class="dom"]').text();
     plist.push({
+      pdb,
       src,
       title: title,
       year: dateTime.getFullYear() + '年 ' + (dateTime.getMonth() + 1) + '月',
       day: dateTime.getDate() + '日'
     })
   })
-  return plist[0]
+  return plist[Math.ceil(Math.random() * plist.length - 1)]
 }
+//豆瓣排行榜
+async function getDoubanHot() {
+  let page = await getPage('https://movie.douban.com/chart/');
+  let $ = cheerio.load(page.text);
+  let random = Math.ceil(Math.random() * 10)
+  let title = $(".indent").find('.item').find('.nbg')[random].attribs.title
+  let image = $(".indent").find('.item').find('.nbg').find('img')[random].attribs.src
+  let desc = $(".indent").find('.item').find('.pl2').find('p[class="pl"]')[random].children[0].data
+  let rating_nums = $(".indent").find('.item').find('.rating_nums')[random].children[0].data
+  let pl = $(".indent").find('.item').find('.star.clearfix').find('.pl')[random].children[0].data
+  let t = desc.substring(0, 4);
+  let time = new Date().getFullYear;
+  if (time - Number(t) <= 0) {
+    t = 0;
+  }
+  return {
+    year: t,
+    average: 1,
+    title,
+    rating_nums,
+    pl,
+    desc,
+    image
+  }
+}
+
 
 
 //获取搜索资源的详细信息

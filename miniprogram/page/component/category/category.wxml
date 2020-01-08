@@ -1,4 +1,7 @@
 <view class="main">
+  <view class="search-box">
+    <input class="search-input" placeholder="搜索" disabled="true" bindtap="toSearch"/>
+  </view>
   <view class="categroy-left">
     <view wx:for="{{category}}" wx:key="index" data-id="{{item.id}}" data-name="{{item.name}}" data-index="{{index}}" bindtap="switchTab" class="cate-list {{curIndex === index?'on':''}}">{{item.name}}</view>
   </view>

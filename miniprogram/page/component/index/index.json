@@ -1,7 +1,6 @@
 {
-  "navigationBarTitleText": "",
-  "disableScroll": false,
   "enablePullDownRefresh": false,
   "usingComponents": {
+      "tui-footer": "../../../components/footer/footer"
   }
 }

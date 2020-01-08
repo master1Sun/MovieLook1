@@ -9,19 +9,14 @@ const db = cloud.database();
 const $ = db.command.aggregate
 
 const Value1 = '查询所有用户';
-const Value2 = '清除我生成的密码';
-const Value3 = '全部访问记录';
-const Value4 = '全部登录次数';
-const Value5 = '密码';
-const Value6 = '网速测试工具';
-const Value7 = '清除剩余用户';
-const Value8 = '查询剩余用户';
-const Value9 = '帮助';
+const Value2 = '全部登录次数';
+const Value3 = '网速测试工具';
+const Value4 = '帮助';
 // 云函数入口函数
-exports.main = async (event, context) => {
+exports.main = async(event, context) => {
   const wxContext = cloud.getWXContext()
   if (fuzzyQuery(Value1, event.Content) || event.Content == '1') {
-    let data = await db.collection("loginLog").aggregate()
+    let data = await db.collection("UserLogin").aggregate()
       .group({
         _id: '$public',
         num: $.sum(1)
@@ -30,7 +25,7 @@ exports.main = async (event, context) => {
     let count_vip = 0
     let count_pt = 0;
     if (data.list.length > 0) {
-      data.list.forEach(function (v) {
+      data.list.forEach(function(v) {
         if (v._id) {
           count_vip = v.num;
         } else {
@@ -40,44 +35,13 @@ exports.main = async (event, context) => {
     }
     await sendMessage('共有高级用户：' + count_vip + '位和普通用户：' + count_pt + '位', event.Content)
   } else if (fuzzyQuery(Value2, event.Content) || event.Content == '2') {
-    let data = await db.collection("user").where({
-      _openid: wxContext.OPENID
-    }).remove()
-    await sendMessage('已经清除您生成的' + data.stats.removed + '条登录密码', event.Content)
-  } else if (fuzzyQuery(Value3, event.Content) || event.Content == '3') {
-    await sendMessage('暂时没有记录', event.Content)
-  } else if (fuzzyQuery(Value4, event.Content) || event.Content == '4') {
-    let data = await db.collection("loginLog").get();
+    let data = await db.collection("UserLogin").get();
     let count = 0;
-    data.data.forEach(function (v) {
+    data.data.forEach(function(v) {
       count += v.loginCount
     })
     await sendMessage('所有人总共登录次数为：' + count + '次', event.Content)
-  } else if (fuzzyQuery(Value5, event.Content) || event.Content == '5') {
-    let time = new Date()
-    time.setHours(time.getHours() + 8);
-    let ft = formatTimeDay(time);
-    let rd = Math.floor((Math.random() * 9 + 1) * 100000);
-    let public = Math.floor(Math.random() * 2) == 0 ? true : false
-    let data = await db.collection("user").where({
-      isUse: true
-    }).get()
-    if (data.data.length <= 5) {
-      await db.collection("user").add({
-        data: {
-          public: public,
-          pwd: rd,
-          isUse: true,
-          _openid: wxContext.OPENID,
-          createtime: ft
-        }
-      })
-      await sendMessage('当前登录密码：' + rd, event.Content)
-    } else {
-      let bj = Math.floor(Math.random() * data.data.length)
-      await sendMessage('当前登录密码：' + data.data[bj].pwd, event.Content)
-    }
-  } else if (fuzzyQuery(Value6, event.Content) || event.Content == '6') {
+  } else if (fuzzyQuery(Value3, event.Content) || event.Content == '3') {
     let data = await cloud.callFunction({
       name: 'getData',
       data: {
@@ -90,27 +54,13 @@ exports.main = async (event, context) => {
         await sendMessage("《网速测试工具》当前测试次数：" + pdata.countnetdata.total + " 次，当前访问人数： " + pdata.countuser.total + "  人。", event.Content);
       }
     }
-  } else if (fuzzyQuery(Value7, event.Content) || event.Content == '7') {
-    let data = await db.collection("user").where({
-      isUse: true
-    }).remove()
-    await sendMessage('已经清除' + data.stats.removed + '条可登录，但是未使用的密码', event.Content)
-  } else if (fuzzyQuery(Value8, event.Content) || event.Content == '8') {
-    let data = await db.collection("user").where({
-      isUse: true
-    }).count()
-    await sendMessage('当前有' + data.total + '条未使用的密码', event.Content)
-  } else if (fuzzyQuery(Value9, event.Content) || event.Content == '9' || event.Content == '') {
+  } else if (fuzzyQuery(Value4, event.Content) || event.Content == '4' || event.Content == '') {
     let help = [];
     help.push('回复对应数字，进行操作！！');
     help.push('1、' + Value1);
     help.push('2、' + Value2);
     help.push('3、' + Value3);
     help.push('4、' + Value4);
-    help.push('5、' + Value5);
-    help.push('6、' + Value6);
-    help.push('7、' + Value7);
-    help.push('8、' + Value8);
     let sendText = JSON.stringify(help)
     for (let i = 0; i < 20; i++) {
       sendText = sendText.replace('"', '').replace('[', '').replace(']', '').replace('，', '')

@@ -63,9 +63,9 @@ Page({
     }
   },
   onShow() {
-    this.setData({
-      hot: getApp().globalData.hot
-    })
+    // this.setData({
+    //   hot: getApp().globalData.hot
+    // })
   },
   search(value) {
     let that = this;

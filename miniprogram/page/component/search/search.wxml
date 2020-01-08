@@ -31,12 +31,12 @@
         <text wx:for="{{history}}" wx:key="index" data-text="{{item}}" bindtap="keywordHandle">{{item}}</text>
       </view>
     </view>
-    <view class="title">
+    <!-- <view class="title">
       <text>热门推荐</text>
     </view>
     <view class="tags">
       <text wx:for="{{hot}}" wx:key="index" data-text="{{item}}" bindtap="keywordHandle">{{item}}</text>
-    </view>
+    </view> -->
   </view>
 
 </view>
