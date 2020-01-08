@@ -5,7 +5,7 @@
 
 ## 实现效果
 扫描小程序码观看效果
-![Image text](https://6174-atao-1258210999.tcb.qcloud.la/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%A2%BC.jpg?sign=89dc23b630eeed630141ab51aecdc326&t=1578467812)
+![Image text](https://github.com/master1Sun/MovieLook1/blob/master/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%A2%BC.jpg)
 
 ## 运行
 需要安装有微信开发者工具  
