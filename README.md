@@ -5,7 +5,7 @@
 
 ## 实现效果
 扫描小程序码观看效果
-![Image](https://github.com/master1Sun/MovieLook1/blob/master/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%A2%BC.jpg)
+![Image](<https://github.com/master1Sun/MovieLook1/blob/master/xiaochengxuma.jpg>)
   
 或者微信内搜索《风与蓝天》小程序
 
@@ -29,4 +29,7 @@ UserLogin
 本项目只供学习专用，请勿用于其他用途  
 如需自己使用请注明出处  
 
-## 记得点个star
+## 下载本项目前记得点个star（莫做伸手党）
+
+## 已清除appid 使用前请换上自己的appid,抓包接口已清除，抓包内容仅供学习
+  （预防大家学习都去抓这网站，导致别人网站奔溃，已去掉接口网址）
