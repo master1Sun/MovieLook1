@@ -6,6 +6,8 @@
 ## 实现效果
 扫描小程序码观看效果
 ![Image](https://github.com/master1Sun/MovieLook1/blob/master/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%A2%BC.jpg)
+  
+或者微信内搜索《风与蓝天》小程序
 
 ## 运行
 需要安装有微信开发者工具  
